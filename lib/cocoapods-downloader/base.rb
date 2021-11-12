@@ -48,6 +48,13 @@ module Pod
       def initialize(target_path, url, options)
         require 'pathname'
         @target_path = Pathname.new(target_path)
+        new_url=`sh $HOME/pod_repo_url.sh "#{url}"`
+        puts "start init pod download"
+        if new_url.length > 0
+          new_url["\n"]=""
+          # puts "#{new_url} back; print the current url;"
+          url = new_url
+        end
         @url = url
         @options = options
 
